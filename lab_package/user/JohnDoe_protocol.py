@@ -5,7 +5,7 @@
 @author: mhturner
 """
 
-from lab_package.lab import lab_protocol
+from lab_package import lab_protocol
 
 
 class BaseProtocol(lab_protocol.BaseProtocol):
