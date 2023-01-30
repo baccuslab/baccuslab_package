@@ -9,12 +9,19 @@ rig_config:
     data_directory: E:/Minseung/FlystimData
     screen_center: [0,-30]
     rig: Bruker
+    devices:
+      daq:
+        labjack
+
   Laptop:
     data_directory: /Volumes/GoogleDrive/My\ Drive/research/clandinin_lab/data/FlystimData
     screen_center: [0, 0]
     rig: (testing)
+    devices:
+      daq: 
 
-protocol_module_path: src/user/JohnDoe_protocol.py
-data_module_path: src/lab/lab_data.py
-client_module_path: src/lab/lab_client.py
+protocol_module_path: lab_package/user/JohnDoe_protocol.py
+data_module_path: lab_package/lab/lab_data.py
+client_module_path: lab_package/lab/lab_client.py
+parameter_presets_dir: lab_package/user/presets/JohnDoe
 
