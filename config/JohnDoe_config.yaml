@@ -1,12 +1,17 @@
 experimenter: JohnDoe
-prep_choices: [Behavior, Right optic lobe, Whole brain]
-driver_choices: [isoD1, Tm3 (R13E12-Gal4), nSyb-Gal4]
-indicator_choices: [TdTomato, GCaMP8f, GCaMP7f]
-effector_choices: [Kir2.1, Shi, CsChrimson, GtACR]
+
+animal_metadata:
+  sex: ['Female', 'Male']
+  # age: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  species: [D. melanogaster]
+  prep: [Behavior, Right optic lobe, Whole brain]
+  driver: [isoD1, Tm3 (R13E12-Gal4), nSyb-Gal4]
+  indicator: [TdTomato, GCaMP8f, GCaMP7f]
+  effector: [Kir2.1, Shi, CsChrimson, GtACR]
 
 rig_config:
   Bruker_LeftScreen:
-    data_directory: 
+    data_directory: /Users/mhturner/Desktop
     screen_center: [0,-30]
     rig: Bruker
     server_options: {'host': '171.65.17.246',
@@ -18,7 +23,7 @@ rig_config:
         labjack
 
   Laptop:
-    data_directory: 
+    data_directory: /Users/mhturner/Desktop
     screen_center: [0, 0]
     rig: (testing)
     devices:
