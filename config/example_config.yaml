@@ -1,0 +1,50 @@
+experimenter: MHT
+
+animal_metadata:
+  # Fill this in with any animal metadata you want
+  # GUI has built-ins for: animal_id, age and notes
+  sex: [Female, Male]  # the first entry will populate the selector in the GUI by default
+  species: [D. melanogaster]
+  prep: ['', optic glomeruli, left optic lobe, right optic lobe]  # Make the first entry empty if you don't want any defaults
+  
+  driver_1: ['', nSyb-Gal4, ChAT-T2A, VGAT-T2A, Gad1-Gal4,
+             L2, LC4, LC6, LC9, LC11, LC12, LC15, LC16, LC17, LC18, LC20, LC21, LC22, LC26,
+             R82D11, R65B05, R71C02, R92B02, R89C10]
+  effector_1: [Syt1GCaMP8m, Syt1GCaMP6f, TdTomato, GCaMP7f, GCaMP6f, GCaMP6m, jRGECO, JEDI]
+
+  driver_2: ['', nSyb-Gal4, ChAT-T2A, VGAT-T2A, Gad1-Gal4,
+             L2, LC4, LC6, LC9, LC11, LC12, LC15, LC16, LC17, LC18, LC20, LC21, LC22, LC26,
+             R82D11, R65B05, R71C02, R92B02, R89C10]
+  effector_2: ['', Syt1GCaMP8m, Syt1GCaMP6f, TdTomato, GCaMP7f, GCaMP6f, GCaMP6m, jRGECO, JEDI]
+
+  # genotype: ['', isoD1]
+  # state: [starved, virgin]
+
+
+rig_config:
+  Bruker_LeftScreen:
+    data_directory: /Users/mhturner/Desktop
+    screen_center: [0,-30]
+    rig: Bruker
+    server_options: {'host': '171.65.17.246',
+                     'port': 60629,
+                     'use_server': True}
+    devices:
+      trigger: daq.nidaq.NIUSB6210(dev='Dev5', trigger_channel='ctr0')
+      daq:
+        labjack
+
+  Laptop:
+    data_directory: /Users/mhturner/Desktop
+    screen_center: [0, 0]
+    rig: (testing)
+    devices:
+      daq: 
+
+
+# Paths relative to the config_dir location specified in path_to_config_dir.txt
+parameter_presets_dir: presets/example
+
+# protocol_module_path: lab_package/user/JohnDoe_protocol.py
+# data_module_path: lab_package/lab_data.py
+# client_module_path: lab_package/lab_client.py
