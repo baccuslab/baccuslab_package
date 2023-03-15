@@ -29,22 +29,24 @@ rig_config:
     server_options: {'host': '171.65.17.246',
                      'port': 60629,
                      'use_server': True}
-    devices:
-      trigger: daq.nidaq.NIUSB6210(dev='Dev5', trigger_channel='ctr0')
-      daq:
-        labjack
+    # devices:
+    #   trigger: daq.nidaq.NIUSB6210(dev='Dev5', trigger_channel='ctr0')
+    #   daq:
+    #     labjack
 
   Laptop:
     data_directory: /Users/mhturner/Desktop
     screen_center: [0, 0]
     rig: (testing)
-    devices:
-      daq: 
+    # devices:
+    #   daq: 
 
 
-# Paths relative to the config_dir location specified in path_to_config_dir.txt
-parameter_presets_dir: presets/example
+# Note, all paths relative to the lab_package location specified in path_to_lab_package.txt
+parameter_presets_dir: presets/example  # directory where your parameter presets live
 
-# protocol_module_path: lab_package/user/JohnDoe_protocol.py
-# data_module_path: lab_package/lab_data.py
-# client_module_path: lab_package/lab_client.py
+module_paths:
+  protocol: protocol/lab_protocol.py  # module for protocol classes. Should include class name "BaseProtocol"
+  data: lab_data.py  # module for data class. Class name should be "Data"
+  client: lab_client.py  # module for client class. Class name should be "Client"
+  devices: [device/nidaq.py]  # list of device modules

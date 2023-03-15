@@ -12,6 +12,6 @@ import numpy as np
 
 from visprotocol import data
 
-class Data(data.Data):
+class Data(data.BaseData):
     def __init__(self, cfg):
         super().__init__(cfg)  # call the parent class init method

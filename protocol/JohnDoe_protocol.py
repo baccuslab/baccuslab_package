@@ -5,8 +5,7 @@
 @author: mhturner
 """
 
-from lab_package import lab_protocol
-
+from protocol import lab_protocol
 
 class BaseProtocol(lab_protocol.BaseProtocol):
     def __init__(self, cfg):
