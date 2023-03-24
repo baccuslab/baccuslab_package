@@ -25,7 +25,7 @@ class BaseProtocol(protocol.BaseProtocol):
     def __init__(self, cfg):
         super().__init__(cfg)  # call the parent class init method
     
-    def startStimuli(self, client, append_stim_frames=False, print_profile=True, multicall=None):
+    def start_stimuli(self, client, append_stim_frames=False, print_profile=True, multicall=None):
 
         do_loco = 'do_loco' in self.cfg and self.cfg['do_loco']
         do_closed_loop = do_loco and 'current_closed_loop' in self.convenience_parameters and self.convenience_parameters['current_closed_loop']
@@ -61,14 +61,14 @@ class BaseProtocol(protocol.BaseProtocol):
 
         sleep(self.run_parameters['tail_time'])
 
-    def getMovingSpotParameters(self, center=None, angle=None, speed=None, radius=None, color=None, distance_to_travel=None):
+    def get_moving_spot_parameters(self, center=None, angle=None, speed=None, radius=None, color=None, distance_to_travel=None):
         if center is None: center = self.protocol_parameters['center']
         if angle is None: angle = self.protocol_parameters['angle']
         if speed is None: speed = self.protocol_parameters['speed']
         if radius is None: radius = self.protocol_parameters['radius']
         if color is None: color = self.protocol_parameters['color']
 
-        center = self.adjustCenter(center)
+        center = self.adjust_center(center)
 
         centerX = center[0]
         centerY = center[1]

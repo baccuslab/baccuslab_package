@@ -46,7 +46,7 @@ rig_config:
 parameter_presets_dir: presets/example  # directory where your parameter presets live
 
 module_paths:
-  protocol: protocol/lab_protocol.py  # module for protocol classes. Should include class name "BaseProtocol"
+  protocol: lab_protocol/JohnDoe_protocol.py  # module for user protocol classes. Should include class name "BaseProtocol"
   data: lab_data.py  # module for data class. Class name should be "Data"
   client: lab_client.py  # module for client class. Class name should be "Client"
   devices: [device/nidaq.py]  # list of device modules
