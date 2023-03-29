@@ -1,15 +1,24 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Example nidaq (data acquisition) device classes
 
-"""
 import nidaqmx
-from nidaqmx.types import CtrTime
-
-from flyrpc.multicall import MyMultiCall
-
 from visprotocol.device import daq
+ 
+ 
+class NIUSB6001(daq.DAQ):
+    """
+    https://www.ni.com/en-us/support/model.usb-6001.html
+    """
+    def __init__(self, dev='Dev1', trigger_channel='port2/line0'):
+        super().__init__()  # call the parent class init method
+        self.dev = dev
+        self.trigger_channel = trigger_channel
+
+    def sendTrigger(self):
+        with nidaqmx.Task() as task:
+            task.do_channels.add_do_chan('{}/{}'.format(self.dev, self.trigger_channel))
+            task.start()
+            task.write([True, False])
 
 
 class NIUSB6210(daq.DAQ):
@@ -38,18 +47,3 @@ class NIUSB6210(daq.DAQ):
             task.start()
             task.wait_until_done()
             task.stop()
-
-class NIUSB6001(daq.DAQ):
-    """
-    https://www.ni.com/en-us/support/model.usb-6001.html
-    """
-    def __init__(self, dev='Dev1', trigger_channel='port2/line0'):
-        super().__init__()  # call the parent class init method
-        self.dev = dev
-        self.trigger_channel = trigger_channel
-
-    def sendTrigger(self):
-        with nidaqmx.Task() as task:
-            task.do_channels.add_do_chan('{}/{}'.format(self.dev, self.trigger_channel))
-            task.start()
-            task.write([True, False])
