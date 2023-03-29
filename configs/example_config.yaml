@@ -30,15 +30,13 @@ rig_config:
     server_options: {'host': '171.65.17.246',
                      'port': 60629,
                      'use_server': True}
-    devices:
-      trigger: NIUSB6210(dev='Dev5', trigger_channel='ctr0')  # This trigger class should be defined in your daq module
+    trigger: NIUSB6210(dev='Dev5', trigger_channel='ctr0')  # This trigger class should be defined in your daq module
 
   Laptop:
     data_directory: /Users/mhturner/Desktop
     screen_center: [0, 0]
     rig: (testing)
-    devices:
-      trigger: NIUSB6210(dev='Dev5', trigger_channel='ctr0')
+    trigger: NIUSB6210(dev='Dev5', trigger_channel='ctr0')
 
 
 # Note, all paths relative to the lab_package location specified in path_to_lab_package.txt
