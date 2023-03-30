@@ -39,9 +39,6 @@ class DriftingSquareGrating(BaseProtocol):
 
         self.convenience_parameters = {'current_angle': current_angle}
 
-        self.meta_parameters = {'center_size': self.protocol_parameters['center_size'],
-                                'center': self.adjust_center(self.protocol_parameters['center'])}
-
     def get_parameter_defaults(self):
         self.protocol_parameters = {'period': 20.0,
                                     'rate': 20.0,
@@ -89,7 +86,7 @@ class MovingSpot(BaseProtocol):
                                     'randomize_order': True}
 
     def get_run_parameter_defaults(self):
-        self.run_parameters = {'protocol_ID': 'ExpandingMovingSpot',
+        self.run_parameters = {'protocol_ID': 'MovingSpot',
                                'num_epochs': 70,
                                'pre_time': 0.5,
                                'stim_time': 3.0,

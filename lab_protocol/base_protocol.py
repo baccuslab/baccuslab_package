@@ -25,7 +25,7 @@ class BaseProtocol(protocol.BaseProtocol):
     def __init__(self, cfg):
         super().__init__(cfg)  # call the parent class init method
     
-    def start_stimuli(self, client, append_stim_frames=False, print_profile=True, multicall=None):
+    def start_stimuli(self, manager, append_stim_frames=False, print_profile=True, multicall=None):
 
         do_loco = 'do_loco' in self.cfg and self.cfg['do_loco']
         do_closed_loop = do_loco and 'current_closed_loop' in self.convenience_parameters and self.convenience_parameters['current_closed_loop']
@@ -34,7 +34,7 @@ class BaseProtocol(protocol.BaseProtocol):
         sleep(self.run_parameters['pre_time'])
         
         if multicall is None:
-            multicall = flyrpc.multicall.MyMultiCall(client.manager)
+            multicall = flyrpc.multicall.MyMultiCall(manager)
 
         # stim time
         # Locomotion / closed-loop
@@ -49,7 +49,7 @@ class BaseProtocol(protocol.BaseProtocol):
         sleep(self.run_parameters['stim_time'])
 
         # tail time
-        multicall = flyrpc.multicall.MyMultiCall(client.manager)
+        multicall = flyrpc.multicall.MyMultiCall(manager)
         multicall.stop_stim(print_profile=print_profile)
         multicall.black_corner_square()
         # Locomotion / closed-loop
