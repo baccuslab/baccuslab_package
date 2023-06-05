@@ -26,7 +26,7 @@ class WhiteNoisePixMap(BaseProtocol, vpprotocol.SharedPixMapProtocol):
         super().get_epoch_parameters()
 
         self.epoch_protocol_parameters['memname'] = random_word.RandomWords().get_random_word()
-        print(self.epoch_protocol_parameters['memname'])
+        print(f"Created memname: {self.epoch_protocol_parameters['memname']}")
 
         frame_shape = (self.epoch_protocol_parameters['n_x'], self.epoch_protocol_parameters['n_y'], 3)
 
@@ -61,7 +61,7 @@ class WhiteNoisePixMap(BaseProtocol, vpprotocol.SharedPixMapProtocol):
                 }
 
     def get_run_parameter_defaults(self):
-        return {'num_epochs': 2,
+        return {'num_epochs': 1,
                 'idle_color': 0.5,
                 'all_combinations': True,
                 'randomize_order': True}
