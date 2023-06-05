@@ -1,9 +1,6 @@
 from lab_package.protocol import base_protocol
 from visprotocol import protocol as vpprotocol
-import numpy as np
-import math
-import flyrpc.multicall
-import random_word
+from flystim.util import generate_lowercase_barcode
 
 class BaseProtocol(base_protocol.BaseProtocol):
     def __init__(self, cfg):
@@ -25,8 +22,8 @@ class WhiteNoisePixMap(BaseProtocol, vpprotocol.SharedPixMapProtocol):
     def get_epoch_parameters(self):
         super().get_epoch_parameters()
 
-        self.epoch_protocol_parameters['memname'] = random_word.RandomWords().get_random_word()
-        print(f"Created memname: {self.epoch_protocol_parameters['memname']}")
+        self.epoch_protocol_parameters['memname'] = generate_lowercase_barcode(10)
+        # print(f"Created memname: {self.epoch_protocol_parameters['memname']}")
 
         frame_shape = (int(self.epoch_protocol_parameters['n_x']), int(self.epoch_protocol_parameters['n_y']), 3)
 
@@ -45,6 +42,10 @@ class WhiteNoisePixMap(BaseProtocol, vpprotocol.SharedPixMapProtocol):
                                       'radius': self.epoch_protocol_parameters['render_radius'],
                                       'n_steps': self.epoch_protocol_parameters['render_n_steps'],
                                       'surface': self.epoch_protocol_parameters['render_surface']}
+
+    # def load_stimuli(self, manager, multicall=None):
+    #     super().load_stimuli(manager, multicall)
+    #     print(f"Loading {self.epoch_protocol_parameters['memname']}")
 
     def get_protocol_parameter_defaults(self):
         return {'pre_time': 1.0,
