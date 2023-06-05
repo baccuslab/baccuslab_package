@@ -4,7 +4,7 @@ animal_metadata:
   # Fill this in with any animal metadata you want
   # GUI has built-ins for: animal_id, age and notes
   sex: [Female, Male]  # the first entry will populate the selector in the GUI by default
-  species: [D. melanogaster]
+  species: [Mouse]
   prep: ['', optic glomeruli, left optic lobe, right optic lobe]  # Make the first entry empty if you don't want any default
   
   driver_1: ['', nSyb-Gal4, ChAT-T2A, VGAT-T2A, Gad1-Gal4,
@@ -23,20 +23,18 @@ animal_metadata:
 
 
 rig_config:
-  Bruker_LeftScreen:
-    data_directory: /Users/mhturner/Desktop
+  magneto:
+    data_directory: /home/baccuslab/Desktop
     screen_center: [0,-30]
     rig: Bruker
     server_options: {'host': '171.65.17.246',
                      'port': 60629,
                      'use_server': True}
-    trigger: NIUSB6210(dev='Dev5', trigger_channel='ctr0')  # This trigger class should be defined in your daq module
 
   Laptop:
     data_directory: /Users/mhturner/Desktop
     screen_center: [0, 0]
     rig: (testing)
-    trigger: NIUSB6210(dev='Dev5', trigger_channel='ctr0')
 
 
 # Note, all paths relative to the lab_package location specified in path_to_lab_package.txt

@@ -3,11 +3,11 @@ from setuptools import setup
 setup(
     name='lab_package',
     version='3.0.0',
-    description='Template lab package for visprotocol',
-    url='https://github.com/mhturner/lab_package',
-    author='Max Turner',
-    author_email='mhturner@stanford.edu',
-    packages=['lab_protocol'],
+    description='Baccus lab package for visprotocol',
+    url='https://github.com/baccuslab/baccuslab_package',
+    author='Minseung Choi and Joshua Melander',
+    author_email='minseung@stanford.edu and melander@stanford.edu',
+    packages=['lab_package'],
     include_package_data=True,
     zip_safe=False,
 )
