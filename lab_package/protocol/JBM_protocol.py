@@ -28,7 +28,7 @@ class WhiteNoisePixMap(BaseProtocol, vpprotocol.SharedPixMapProtocol):
         self.epoch_protocol_parameters['memname'] = random_word.RandomWords().get_random_word()
         print(f"Created memname: {self.epoch_protocol_parameters['memname']}")
 
-        frame_shape = (self.epoch_protocol_parameters['n_x'], self.epoch_protocol_parameters['n_y'], 3)
+        frame_shape = (int(self.epoch_protocol_parameters['n_x']), int(self.epoch_protocol_parameters['n_y']), 3)
 
         self.epoch_shared_pixmap_stim_parameters = {'name': 'WhiteNoise',
                                                     'memname': self.epoch_protocol_parameters['memname'],
@@ -51,8 +51,8 @@ class WhiteNoisePixMap(BaseProtocol, vpprotocol.SharedPixMapProtocol):
                 'stim_time': 4.0,
                 'tail_time': 1.0,
                 
-                'n_x': 20.0,
-                'n_y': 20.0,
+                'n_x': 20,
+                'n_y': 20,
                 'frame_rate': 10.0,
                 'seed': 37,
                 'render_n_steps': 16,
