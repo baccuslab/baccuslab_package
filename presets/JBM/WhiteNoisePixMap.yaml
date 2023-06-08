@@ -1,0 +1,36 @@
+wn_test:
+  run_parameters:
+    num_epochs: 10
+    idle_color: 0.5
+    all_combinations: true
+    randomize_order: true
+  protocol_parameters:
+    pre_time: 5
+    stim_time: 25
+    tail_time: 5
+    angular_width: 360
+    boxes_w: 240
+    boxes_h: 120
+    frame_rate: 10.0
+    seed: 37
+    render_n_steps: 16
+    render_surface: spherical
+    render_radius: 1
+wn_train:
+  run_parameters:
+    num_epochs: 1
+    idle_color: 0.5
+    all_combinations: true
+    randomize_order: true
+  protocol_parameters:
+    pre_time: 5
+    stim_time: 1500
+    tail_time: 5
+    angular_width: 360
+    boxes_w: 240
+    boxes_h: 120
+    frame_rate: 10.0
+    seed: 2023
+    render_n_steps: 16
+    render_surface: spherical
+    render_radius: 1

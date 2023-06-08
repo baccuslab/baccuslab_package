@@ -1,0 +1,34 @@
+test:
+  run_parameters:
+    num_epochs: 10
+    idle_color: 0.5
+    all_combinations: true
+    randomize_order: true
+  protocol_parameters:
+    pre_time: 5
+    stim_time: 25
+    tail_time: 5
+    start_frame: 1000
+    angular_width: 360
+    filepath: /home/baccuslab/Videos/threesixty.mp4
+    frame_rate: 25
+    render_n_steps: 16
+    render_surface: spherical
+    render_radius: 1
+train:
+  run_parameters:
+    num_epochs: 1
+    idle_color: 0.5
+    all_combinations: true
+    randomize_order: true
+  protocol_parameters:
+    pre_time: 5
+    stim_time: 1500
+    tail_time: 5
+    start_frame: 1000
+    angular_width: 360
+    filepath: /home/baccuslab/Videos/threesixty.mp4
+    frame_rate: 25
+    render_n_steps: 16
+    render_surface: spherical
+    render_radius: 1

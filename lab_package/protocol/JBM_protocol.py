@@ -1,4 +1,5 @@
 from lab_package.protocol import base_protocol
+import cv2
 from visprotocol import protocol as vpprotocol
 from flystim.util import generate_lowercase_barcode
 
@@ -8,6 +9,59 @@ class BaseProtocol(base_protocol.BaseProtocol):
 
 
 # %% # # # SIMPLE SYNTHETIC STIMS # # # # # # # # #
+class MovieFilePixMap(BaseProtocol, vpprotocol.SharedPixMapProtocol):
+    def __init__(self, cfg):
+        super().__init__(cfg)
+
+        self.run_parameters = self.get_run_parameter_defaults()
+        self.protocol_parameters = self.get_protocol_parameter_defaults()
+
+    def get_epoch_parameters(self):
+        super().get_epoch_parameters()
+
+        self.epoch_protocol_parameters['memname'] = generate_lowercase_barcode(10)
+
+        filepath = self.protocol_parameters['filepath']
+        cap = cv2.VideoCapture(filepath)
+        ret,frame = cap.read()
+
+        frame_shape = frame.shape
+
+        self.epoch_shared_pixmap_stim_parameters = {'name': 'StreamMovie',
+                                                    'memname': self.epoch_protocol_parameters['memname'],
+                                                    'filepath': self.protocol_parameters['filepath'],
+                                                    'nominal_frame_rate': self.epoch_protocol_parameters['frame_rate'],
+                                                    'duration': self.epoch_protocol_parameters['stim_time'],
+                                                    'start_frame': self.epoch_protocol_parameters['start_frame']}
+
+        self.epoch_stim_parameters = {'name': 'PixMap',
+                                      'memname': self.epoch_protocol_parameters['memname'],
+                                      'frame_size': frame_shape,
+                                      'rgb_texture': True,
+                                      'width': self.epoch_protocol_parameters['angular_width'],
+                                      'radius': self.epoch_protocol_parameters['render_radius'],
+                                      'n_steps': self.epoch_protocol_parameters['render_n_steps'],
+                                      'surface': self.epoch_protocol_parameters['render_surface']}
+
+
+    def get_protocol_parameter_defaults(self):
+        return {'pre_time': 1.0,
+                'stim_time': 4.0,
+                'tail_time': 1.0,
+                'start_frame': 1000,
+                'angular_width': 360,
+                'filepath': '/home/baccuslab/Videos/threesixty.mp4', 
+                'frame_rate': 10.0,
+                'render_n_steps': 16,
+                'render_surface': 'spherical', # cylindrical, cylindrical_with_phi
+                'render_radius': 1,
+                }
+
+    def get_run_parameter_defaults(self):
+        return {'num_epochs': 1,
+                'idle_color': 0.5,
+                'all_combinations': True,
+                'randomize_order': True}
 
 class WhiteNoisePixMap(BaseProtocol, vpprotocol.SharedPixMapProtocol):
     """
@@ -25,35 +79,32 @@ class WhiteNoisePixMap(BaseProtocol, vpprotocol.SharedPixMapProtocol):
         self.epoch_protocol_parameters['memname'] = generate_lowercase_barcode(10)
         # print(f"Created memname: {self.epoch_protocol_parameters['memname']}")
 
-        frame_shape = (int(self.epoch_protocol_parameters['n_x']), int(self.epoch_protocol_parameters['n_y']), 3)
+        frame_shape = (int(self.epoch_protocol_parameters['boxes_h']), int(self.epoch_protocol_parameters['boxes_w']), 3)
 
         self.epoch_shared_pixmap_stim_parameters = {'name': 'WhiteNoise',
                                                     'memname': self.epoch_protocol_parameters['memname'],
                                                     'frame_shape': frame_shape,
                                                     'nominal_frame_rate': self.epoch_protocol_parameters['frame_rate'],
                                                     'dur': self.epoch_protocol_parameters['stim_time'],
-                                                    'seed': self.epoch_protocol_parameters['seed'],
-                                                    'coverage': 'full'}
+                                                    'seed': self.epoch_protocol_parameters['seed']}
+
         self.epoch_stim_parameters = {'name': 'PixMap',
                                       'memname': self.epoch_protocol_parameters['memname'],
                                       'frame_size': frame_shape,
                                       'rgb_texture': True,
-                                      'width': 180,
+                                      'width': self.epoch_protocol_parameters['angular_width'],
                                       'radius': self.epoch_protocol_parameters['render_radius'],
                                       'n_steps': self.epoch_protocol_parameters['render_n_steps'],
                                       'surface': self.epoch_protocol_parameters['render_surface']}
 
-    # def load_stimuli(self, manager, multicall=None):
-    #     super().load_stimuli(manager, multicall)
-    #     print(f"Loading {self.epoch_protocol_parameters['memname']}")
 
     def get_protocol_parameter_defaults(self):
         return {'pre_time': 1.0,
                 'stim_time': 4.0,
                 'tail_time': 1.0,
-                
-                'n_x': 20,
-                'n_y': 20,
+                'angular_width': 360,
+                'boxes_w': 200,
+                'boxes_h': 200,
                 'frame_rate': 10.0,
                 'seed': 37,
                 'render_n_steps': 16,
@@ -158,5 +209,34 @@ class MovingPatch(BaseProtocol):
     def get_run_parameter_defaults(self):
         return {'num_epochs': 40,
                 'idle_color': 0.5,
+                'all_combinations': True,
+                'randomize_order': True}
+
+class SyncPulse(BaseProtocol):
+    """
+    Drifting square wave grating, painted on a cylinder
+    """
+    def __init__(self, cfg):
+        super().__init__(cfg)
+
+        self.run_parameters = self.get_run_parameter_defaults()
+        self.protocol_parameters = self.get_protocol_parameter_defaults()
+
+    def get_epoch_parameters(self):
+        super().get_epoch_parameters()
+        
+        self.epoch_stim_parameters = {'name': 'SyncPulse',
+                                      'color': [1.0, 1.0, 1.0, 1.0]}
+
+
+    def get_protocol_parameter_defaults(self):
+        return {'pre_time': 1.0,
+                'stim_time': 1.0,
+                'tail_time': 1.0,
+                'color': [1, 1, 1, 1]}
+
+    def get_run_parameter_defaults(self):
+        return {'num_epochs': 5,
+                'idle_color': 0.0,
                 'all_combinations': True,
                 'randomize_order': True}

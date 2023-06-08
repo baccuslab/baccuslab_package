@@ -28,16 +28,16 @@ class MagnetoServer(BaseServer):
             viewport_ll = (-1.0, -1.0)
             viewport_width  = 2
             viewport_height = 2
-            pa = (-4, -2, -2)
-            pb = (0, 4, -2)
-            pc = (-4, -2, 2)
+            pa = (-14, -7, -2)
+            pb = (0, 10, -2)
+            pc = (-14, -7, 10)
         elif dir == 'r':
             viewport_ll = (-1.0, -1.0)
             viewport_width  = 2
             viewport_height = 2
-            pa = (0, 4, -2)
-            pb = (4, -2, -2)
-            pc = (0, 4, 2)
+            pa = (0, 10, -2)
+            pb = (14, -7, -2)
+            pc = (0, 10, 10)
         elif dir == 'aux':
             viewport_ll = (-1.0, -1.0)
             viewport_width  = 2
@@ -51,8 +51,8 @@ class MagnetoServer(BaseServer):
 
 def main():
     left_screen = Screen(subscreens=[MagnetoServer.get_subscreens('l')], server_number=1, id=2, fullscreen=True, vsync=True, square_size=(0.1, 0.1), square_loc=(-0.9, -0.9), name='Left', horizontal_flip=False)
-    right_screen = Screen(subscreens=[MagnetoServer.get_subscreens('r')], server_number=1, id=1, fullscreen=True, vsync=True, square_size=(0.1, 0.1), square_loc=(0.9, 0.9), name='Right', horizontal_flip=False)
-    aux_screen = Screen(subscreens=[MagnetoServer.get_subscreens('aux')], server_number=1, id=0, fullscreen=False, vsync=True, square_size=(0.1, 0.1), square_loc=(-1, -1), name='Aux', horizontal_flip=False)
+    right_screen = Screen(subscreens=[MagnetoServer.get_subscreens('r')], server_number=1, id=1, fullscreen=True, vsync=False, square_size=(0.1, 0.1), square_loc=(0.9, 0.9), name='Right', horizontal_flip=False)
+    aux_screen = Screen(subscreens=[MagnetoServer.get_subscreens('aux')], server_number=1, id=0, fullscreen=False, vsync=False, square_size=(0.1, 0.1), square_loc=(-1, -1), name='Aux', horizontal_flip=False)
 
     screens = [left_screen, right_screen, aux_screen]
 

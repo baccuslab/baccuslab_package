@@ -7,7 +7,6 @@ from time import sleep
 #!/usr/bin/env python3
 import sys
 import os
-import random_word
 import threading
 
 import keyboard
@@ -24,8 +23,6 @@ import time
 def redo(manager,ax1,ax2,color):
     
     manager.stop_stim()
-    manager.black_corner_square()
-    manager.load_stim(name='ConstantBackground', color=[0.5,0.5,0.5,0.5])
     manager.load_stim(name='MovingPatch', width=ax1, height=ax2, color = color, hold=True)
     # manager.load_stim(name='RotatingGrating', rate=10, period=20, mean=0.5, contrast=0.5, offset=0.0, profile='square',
                       # color=[1, 1, 1, 1], cylinder_radius=1.1, cylinder_height=10, theta=0, phi=0, angle=0, hold=True)
@@ -37,6 +34,7 @@ def main():
 
 
     manager = init_screens()
+    manager.load_stim(name='ConstantBackground', color=[0.5,0.5,0.5,0.5])
     manager.black_corner_square()
     idle(2)
     
@@ -115,13 +113,5 @@ def main():
 
 
 
-    try:
-        process.terminate()
-    except:
-        pass
-
-    idle(INTERVAL)
-
-    del root_stim,process
 if __name__ == '__main__':
     main()
